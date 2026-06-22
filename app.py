@@ -4,173 +4,84 @@ from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 
 # Initializes your app with your bot token
-app: App = App(token=os.environ.get("SLACK_BOT_TOKEN"))
+app = App(token=os.environ.get("SLACK_BOT_TOKEN"))
 
+# ==============================================================================
+# MODULE 1: THE NEURO SWEEP (Automated RTS API Integration)
+# ==============================================================================
 
-# Listens to incoming messages that contain "hello"
-@app.message("hello")
-def message_hello(message, say) -> None:
+@app.event("app_mention")
+def handle_lifeline_dispatch(event, client, say, context):
+    """
+    Listens for @Lifeline mentions in any channel (e.g., #intake).
+    Automatically triggers the RTS API to scan #logistics-alerts for ambient context.
+    """
+    channel_id = event["channel"]
+    user_id = event["user"]
+    
+    # 1. Immediate UI Feedback (The "Thinking" State)
     say(
-        blocks=[
-            {
-                "type": "section",
-                "text": {"type": "mrkdwn", "text": f"Hey there <@{message['user']}>!"}
-            },
-            {
-                "type": "actions",
-                "elements": [
-                    {
-                        "type": "button",
-                        "text": {"type": "plain_text", "text": "Click Me"},
-                        "action_id": "button_click",
-                        "accessibility_label": "sup bro. comon clickkkk!!"
-                    }
-                ]
-            },
-            {
-                "type": "context",
-                "elements": [
-                    {"type": "mrkdwn", "text": "_sup bro. comon clickkkk!!_"}
-                ]
-            }
-        ],                                                                                           
-        text=f"Hey there <@{message['user']}>!",
+        text="🔄 **Lifeline is assessing the situation...**\n• Parsing intake details...\n• Scanning `#logistics-alerts` for ambient context...",
+        thread_ts=event["ts"] # Reply in a thread to keep #intake clean
     )
 
-
-@app.message(r"^search:\s*(.*)")
-def handle_realtime_search(context, client, say, message) -> None:
-    """
-    Handles messages like "search: project alpha" and returns search results
-    from the workspace using the assistant.search.context API.
-    """
-    # Extract the search query from the regex group
-    search_query: str = context["matches"][0]
-
-    if not search_query.strip():
-        say("Please provide a search query. Example: `search: project alpha`")
-        return
-
-    say(f"🔍 Searching workspace for: `{search_query}`...")
-
+    # 2. Execute Real-Time Search (RTS) API
+    # We use search.messages with channel-specific syntax to isolate #logistics-alerts
     try:
-        # Prepare the API call parameters
-        api_params = {
-            "query": search_query,
-            "limit": 5,                       # max 20 per page
-            "channel_types": ["public_channel", "private_channel"],
-            "content_types": ["messages"],
-            "include_bots": False,
-        }
-
-        # ⚠️ IMPORTANT: action_token handling
-        #
-        # If you use a **bot token** (xoxb-), you MUST provide an action_token
-        # that Slack passes in the event payload. This token is needed for
-        # assistant.search.context to work with bot tokens.
-        #
-        # If you use a **user token** (xoxp-), you do NOT need action_token.
-        #
-        # The code below tries to get action_token from the context (if available).
-        # Make sure your app subscribes to `message.channels` or `app_mention`
-        # events so that action_token is present.
-        if "action_token" in context:
-            api_params["action_token"] = context["action_token"]
-        else:
-            # If using a bot token and no action_token, the call will fail.
-            # You can log a warning or fall back to a user token if you have one.
-            print("Warning: No action_token found. If using a bot token, search will fail.")
-
-        # Call the API using the generic api_call method
-        # (If your SDK has client.assistant.search.context, you can use that instead)
-        response = client.api_call(
-            api_method="assistant.search.context",
-            params=api_params
+        rts_query = "channel:#logistics-alerts (closure OR flood OR closed OR outage OR blocked)"
+        
+        # Call the native Slack RTS API
+        rts_response = client.search_messages(
+            query=rts_query,
+            sort="timestamp",
+            sort_dir="desc",
+            count=3 # We only need the 3 most recent alerts
         )
 
-        # Handle the response
-        if response.get("ok"):
-            results = response.get("results", {})
-            messages = results.get("messages", [])
-
-            if not messages:
-                say("❌ No matching messages found.")
-                return
-
-            # Build a nice Slack message with blocks
-            blocks = [
-                {
-                    "type": "section",
-                    "text": {"type": "mrkdwn", "text": f"*🔎 Search results for: '{search_query}'*"}
-                },
-                {"type": "divider"}
-            ]
-
-            for msg in messages[:5]:   # Show at most 5
-                author = msg.get("author_name", "Unknown user")
-                channel_name = msg.get("channel_name", "unknown")
-                channel_id = msg.get("channel_id")
-                content = msg.get("content", "")
-                permalink = msg.get("permalink", "#")
-                timestamp = msg.get("timestamp")
-
-                # Format timestamp (optional)
-                time_str = ""
-                if timestamp:
-                    try:
-                        dt = datetime.fromtimestamp(float(timestamp))
-                        time_str = dt.strftime("%Y-%m-%d %H:%M")
-                    except:
-                        pass
-
-                blocks.append({
-                    "type": "section",
-                    "text": {
-                        "type": "mrkdwn",
-                        "text": (
-                            f"👤 *{author}* in <#{channel_id}|{channel_name}>:\n"
-                            f"> {content}\n"
-                            f"🕒 {time_str}  ·  <{permalink}|View original message>"
-                        )
-                    }
-                })
-
-            # Show pagination hint if more results exist
-            next_cursor = response.get("next_cursor")
-            if next_cursor:
-                blocks.append({
-                    "type": "context",
-                    "elements": [
-                        {"type": "mrkdwn", "text": f"*More results available.* Use `search: {search_query} --page` to fetch next page."}
-                    ]
-                })
-
-            say(blocks=blocks, text=f"Search results for '{search_query}'")
-
+        if rts_response["ok"]:
+            matches = rts_response["messages"]["matches"]
+            
+            if matches:
+                # 3. Synthesize and format the ambient context
+                alerts_text = ""
+                for hit in matches:
+                    channel_name = hit["channel"]["name"]
+                    msg_text = hit["text"]
+                    permalink = hit["permalink"]
+                    alerts_text += f"• <{permalink}|[{channel_name}]> {msg_text}\n"
+                
+                say(
+                    text=f"⚠️ **AMBIENT CONTEXT DETECTED:**\n{alerts_text}\n\n_🧠 Now verifying physical constraints via Ontology MCP..._",
+                    thread_ts=event["ts"]
+                )
+                # NEXT STEP: Pass 'matches' to the Ontology MCP logic here
+                
+            else:
+                say(
+                    text="✅ **Ambient Sweep Clear:** No active logistics alerts in `#logistics-alerts`.\n\n_🧠 Now verifying physical constraints via Ontology MCP..._",
+                    thread_ts=event["ts"]
+                )
+                # NEXT STEP: Proceed to MCP tool calls
         else:
-            error = response.get("error", "unknown error")
-            say(f"❌ Search failed: {error}")
+            say(text=f"❌ RTS API Error: {rts_response.get('error')}", thread_ts=event["ts"])
 
     except Exception as e:
-        say(f"⚠️ An error occurred: {str(e)}")
+        say(text=f"⚠️ System Error during RTS Sweep: {str(e)}", thread_ts=event["ts"])
 
-# Listens to incoming message that contains "goodbye"
-@app.message("goodbye")
-def message_goodbye(say) -> None:
-    responses: list[str] = ["Adios", "Au revoir", "Fairwell"]
-    parting: str = random.choice(responses)
-    say(f"{parting}!")
 
+# ==============================================================================
+# BOILERPLATE / TESTING (Keep your existing handlers for local testing)
+# ==============================================================================
+
+@app.message("hello")
+def message_hello(message, say) -> None:
+    say(text=f"Hey there <@{message['user']}>! (Lifeline System Online)")
 
 @app.action("button_click")
 def action_button_click(body, ack, say) -> None:
     ack()
-    say(f"<@{body['user']['id']}> clicked the button")
-
+    say(f"<@{body['user']['id']}> clicked the dispatch confirmation button.")
 
 # Start your app
 if __name__ == "__main__":
     SocketModeHandler(app, os.environ["SLACK_APP_TOKEN"]).start()
-
-
-
