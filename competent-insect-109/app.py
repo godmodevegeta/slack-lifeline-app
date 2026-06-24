@@ -12,7 +12,9 @@ from listeners import register_listeners
 load_dotenv(dotenv_path=".env", override=False)
 get_model()  # Fail fast if no AI provider key is configured
 
-logging.basicConfig(level=logging.DEBUG)
+handler = logging.StreamHandler()
+handler.setFormatter(logging.Formatter('[%(asctime)s] %(levelname)-8s | %(message)s', datefmt='%H:%M:%S'))
+logging.basicConfig(level=logging.INFO, handlers=[handler])
 
 app = App(
     token=os.environ.get("SLACK_BOT_TOKEN"),
