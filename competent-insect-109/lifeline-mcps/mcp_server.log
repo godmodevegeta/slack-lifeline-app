@@ -1,0 +1,12 @@
+2026-07-02 16:54:24 | INFO     | lifeline.mcp | Environment variables loaded from .env
+2026-07-02 16:54:24 | INFO     | lifeline.mcp | FastMCP server instance created: Lifeline-Unified-MCP
+2026-07-02 16:54:24 | INFO     | lifeline.mcp | Ontology loaded — top-level keys: ['schema_version', 'last_updated', 'description', 'object_classes', 'constraint_rules', 'priority_matrix', 'validation_examples']
+2026-07-02 16:54:24 | INFO     | lifeline.mcp | Airtable client ready (base=apptIDO8OdVgMsyw5, table=tbl8zws93R3M0ulsY)
+2026-07-02 16:54:24 | INFO     | lifeline.mcp | Google Sheets service account authenticated
+2026-07-02 16:54:26 | INFO     | lifeline.mcp | Spreadsheet 'slack_lifeline' opened successfully
+2026-07-02 16:54:26 | INFO     | lifeline.mcp | Worksheet 'volunteer_roster' loaded
+2026-07-02 16:54:26 | INFO     | lifeline.mcp | Starting Lifeline MCP server on port 8000 (transport=http)
+2026-07-02 16:54:26 | INFO     | mcp.server.streamable_http_manager | StreamableHTTP session manager started
+2026-07-02 16:54:42 | INFO     | mcp.server.streamable_http_manager | Created new transport with session ID: 1273df3ccf4c42f4b5dc490c08b9931c
+2026-07-02 16:54:43 | INFO     | mcp.server.lowlevel.server | Processing request of type ListToolsRequest
+2026-07-02 16:54:53 | INFO     | mcp.server.streamable_http | Terminating session: 1273df3ccf4c42f4b5dc490c08b9931c
