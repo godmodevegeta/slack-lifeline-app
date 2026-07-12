@@ -1,0 +1,117 @@
+{
+  "schema_version": "4.0.0",
+  "description": "Lifeline Physical Constraint Ontology — deterministic validation layer for emergency resource dispatch",
+  "object_classes": {
+    "mobility_aid": {
+      "instances": {
+        "manual_wheelchair": {
+          "weight_lbs": 40,
+          "requires_ramp": false,
+          "requires_lift": false,
+          "cargo_space_cu_ft": 8,
+          "securement_points": 0,
+          "power_requirement": null
+        },
+        "motorized_wheelchair": {
+          "weight_lbs": 350,
+          "requires_ramp": false,
+          "requires_lift": true,
+          "lift_capacity_min_lbs": 400,
+          "cargo_space_cu_ft": 35,
+          "securement_points": 4,
+          "power_requirement": "12V"
+        },
+        "walker": {
+          "weight_lbs": 10,
+          "requires_ramp": false,
+          "requires_lift": false,
+          "cargo_space_cu_ft": 2,
+          "securement_points": 0,
+          "power_requirement": null
+        },
+        "scooter": {
+          "weight_lbs": 120,
+          "requires_ramp": true,
+          "requires_lift": false,
+          "cargo_space_cu_ft": 20,
+          "securement_points": 2,
+          "power_requirement": "24V"
+        }
+      }
+    },
+    "vehicle": {
+      "instances": {
+        "sedan": {
+          "cargo_space_cu_ft": 15,
+          "lift_equipped": false,
+          "lift_capacity_lbs": 0,
+          "ramp_equipped": false,
+          "securement_points": 0,
+          "power_outlets": [],
+          "passenger_capacity": 4,
+          "wheelchair_slots": 0
+        },
+        "suv": {
+          "cargo_space_cu_ft": 35,
+          "lift_equipped": false,
+          "lift_capacity_lbs": 0,
+          "ramp_equipped": false,
+          "securement_points": 2,
+          "power_outlets": ["12V"],
+          "passenger_capacity": 5,
+          "wheelchair_slots": 0
+        },
+        "van": {
+          "cargo_space_cu_ft": 45,
+          "lift_equipped": true,
+          "lift_capacity_lbs": 300,
+          "ramp_equipped": false,
+          "securement_points": 4,
+          "power_outlets": ["12V"],
+          "passenger_capacity": 8,
+          "wheelchair_slots": 1
+        },
+        "heavy_duty_van": {
+          "cargo_space_cu_ft": 65,
+          "lift_equipped": true,
+          "lift_capacity_lbs": 800,
+          "ramp_equipped": true,
+          "securement_points": 8,
+          "power_outlets": ["12V", "110V_inverter", "24V"],
+          "passenger_capacity": 6,
+          "wheelchair_slots": 2
+        },
+        "bus": {
+          "cargo_space_cu_ft": 80,
+          "lift_equipped": true,
+          "lift_capacity_lbs": 600,
+          "ramp_equipped": true,
+          "securement_points": 8,
+          "power_outlets": ["12V", "110V_inverter", "24V"],
+          "passenger_capacity": 24,
+          "wheelchair_slots": 2
+        }
+      }
+    },
+    "animal": {
+      "instances": {
+        "service_dog": {
+          "vehicle_requirement": "rides_with_handler",
+          "space_required_cu_ft": 15
+        },
+        "pet_dog_small": {
+          "vehicle_requirement": "carrier_required",
+          "space_required_cu_ft": 8
+        },
+        "pet_dog_large": {
+          "vehicle_requirement": "rides_with_handler_or_cargo",
+          "space_required_cu_ft": 20
+        },
+        "cat": {
+          "vehicle_requirement": "carrier_required",
+          "space_required_cu_ft": 6
+        }
+      }
+    }
+  }
+}
