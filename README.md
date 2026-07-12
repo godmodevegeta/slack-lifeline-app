@@ -35,7 +35,7 @@ This guide will walk you through setting up the Lifeline environment, running th
    
    # Lifeline MCP Backend
    AIRTABLE_PAT=pat...
-   LIFELINE_MCP_URL=https://<your-ngrok-url>.ngrok-free.app/sse
+   LIFELINE_MCP_URL=https://<your-ngrok-url>.ngrok-free.app/mcp
    
    # Channel IDs
    INTAKE_CHANNEL_ID=C_...
@@ -65,7 +65,7 @@ The Lifeline MCP server must be running and exposed to the internet before start
 
 1. Go to your Slack App configuration page.
 2. Under **Agent Builder** -> **MCP Servers**, add a new server.
-3. Paste your `ngrok` URL (e.g., `https://abc-123.ngrok-free.app/sse`).
+3. Paste your `ngrok` URL (e.g., `https://abc-123.ngrok-free.app/mcp`).
 4. Ensure the app has the necessary scopes installed (`chat:write`, `channels:history`, `search:read`, etc.).
 5. Install/Reinstall the app to your workspace.
 
