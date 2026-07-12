@@ -1,0 +1,792 @@
+{
+  "schema_version": "3.0.0",
+  "last_updated": "2026-06-24T13:49:00Z",
+  "description": "Lifeline Physical Constraint Ontology — deterministic validation layer for emergency resource dispatch",
+  "object_classes": {
+    "mobility_aid": {
+      "description": "Any device used to assist with movement",
+      "instances": {
+        "manual_wheelchair": {
+          "weight_lbs": 15,
+          "folded_dimensions_in": {
+            "w": 12,
+            "h": 36,
+            "d": 28
+          },
+          "unfolded_dimensions_in": {
+            "w": 26,
+            "h": 36,
+            "d": 42
+          },
+          "requires_ramp": true,
+          "requires_lift": false,
+          "lift_capacity_min_lbs": null,
+          "cargo_space_cu_ft": 8,
+          "securement_points": 2,
+          "power_requirement": null,
+          "operator_assistance": "minimal",
+          "notes": "Standard foldable. Fits most sedan trunks with seat down."
+        },
+        "motorized_wheelchair": {
+          "weight_lbs": 350,
+          "folded_dimensions_in": null,
+          "unfolded_dimensions_in": {
+            "w": 28,
+            "h": 48,
+            "d": 48
+          },
+          "requires_ramp": false,
+          "requires_lift": true,
+          "lift_capacity_min_lbs": 400,
+          "cargo_space_cu_ft": 35,
+          "securement_points": 4,
+          "power_requirement": "12V",
+          "operator_assistance": "trained_only",
+          "notes": "Heavy-duty. Requires vehicle with powered lift and 4-point tie-down system."
+        },
+        "bariatric_wheelchair": {
+          "weight_lbs": 600,
+          "folded_dimensions_in": null,
+          "unfolded_dimensions_in": {
+            "w": 36,
+            "h": 52,
+            "d": 52
+          },
+          "requires_ramp": false,
+          "requires_lift": true,
+          "lift_capacity_min_lbs": 700,
+          "cargo_space_cu_ft": 55,
+          "securement_points": 6,
+          "power_requirement": "12V",
+          "operator_assistance": "two_person_min",
+          "notes": "Extra-wide frame. Requires heavy-duty van with reinforced lift. Two-person load/unload."
+        },
+        "walker": {
+          "weight_lbs": 7,
+          "folded_dimensions_in": {
+            "w": 18,
+            "h": 32,
+            "d": 4
+          },
+          "unfolded_dimensions_in": {
+            "w": 26,
+            "h": 32,
+            "d": 20
+          },
+          "requires_ramp": false,
+          "requires_lift": false,
+          "lift_capacity_min_lbs": null,
+          "cargo_space_cu_ft": 2,
+          "securement_points": 0,
+          "power_requirement": null,
+          "operator_assistance": "none",
+          "notes": "Fits in any vehicle. No special accommodation needed."
+        },
+        "rollator": {
+          "weight_lbs": 15,
+          "folded_dimensions_in": {
+            "w": 11,
+            "h": 36,
+            "d": 25
+          },
+          "unfolded_dimensions_in": {
+            "w": 25,
+            "h": 36,
+            "d": 28
+          },
+          "requires_ramp": false,
+          "requires_lift": false,
+          "lift_capacity_min_lbs": null,
+          "cargo_space_cu_ft": 5,
+          "securement_points": 0,
+          "power_requirement": null,
+          "operator_assistance": "minimal",
+          "notes": "Walker with seat and wheels. Slightly bulkier than standard walker."
+        },
+        "crutches": {
+          "weight_lbs": 3,
+          "folded_dimensions_in": null,
+          "unfolded_dimensions_in": {
+            "w": 3,
+            "h": 54,
+            "d": 3
+          },
+          "requires_ramp": false,
+          "requires_lift": false,
+          "lift_capacity_min_lbs": null,
+          "cargo_space_cu_ft": 1,
+          "securement_points": 0,
+          "power_requirement": null,
+          "operator_assistance": "none",
+          "notes": "Pair of underarm or forearm crutches. No accommodation needed."
+        },
+        "cane": {
+          "weight_lbs": 1,
+          "folded_dimensions_in": null,
+          "unfolded_dimensions_in": {
+            "w": 2,
+            "h": 36,
+            "d": 2
+          },
+          "requires_ramp": false,
+          "requires_lift": false,
+          "lift_capacity_min_lbs": null,
+          "cargo_space_cu_ft": 0.5,
+          "securement_points": 0,
+          "power_requirement": null,
+          "operator_assistance": "none",
+          "notes": "Single-point cane. No accommodation needed."
+        },
+        "scooter": {
+          "weight_lbs": 85,
+          "folded_dimensions_in": {
+            "w": 20,
+            "h": 18,
+            "d": 42
+          },
+          "unfolded_dimensions_in": {
+            "w": 22,
+            "h": 36,
+            "d": 48
+          },
+          "requires_ramp": true,
+          "requires_lift": false,
+          "lift_capacity_min_lbs": null,
+          "cargo_space_cu_ft": 20,
+          "securement_points": 2,
+          "power_requirement": "24V",
+          "operator_assistance": "minimal",
+          "notes": "Mobility scooter. Breaks into 4 pieces for transport. Requires ramp or cargo van."
+        },
+        "service_animal": {
+          "weight_lbs": 75,
+          "folded_dimensions_in": null,
+          "unfolded_dimensions_in": {
+            "w": 24,
+            "h": 30,
+            "d": 42
+          },
+          "requires_ramp": false,
+          "requires_lift": false,
+          "lift_capacity_min_lbs": null,
+          "cargo_space_cu_ft": 15,
+          "securement_points": 0,
+          "power_requirement": null,
+          "operator_assistance": "none",
+          "notes": "ADA-protected service animal. Must ride with handler, not in cargo area."
+        },
+        "oxygen_tank": {
+          "weight_lbs": 8,
+          "folded_dimensions_in": null,
+          "unfolded_dimensions_in": {
+            "w": 7,
+            "h": 26,
+            "d": 7
+          },
+          "requires_ramp": false,
+          "requires_lift": false,
+          "lift_capacity_min_lbs": null,
+          "cargo_space_cu_ft": 1,
+          "securement_points": 1,
+          "power_requirement": null,
+          "operator_assistance": "none",
+          "notes": "Portable oxygen concentrator or E-tank. Must remain upright. Securement required."
+        },
+        "hospital_bed": {
+          "weight_lbs": 180,
+          "folded_dimensions_in": null,
+          "unfolded_dimensions_in": {
+            "w": 36,
+            "h": 24,
+            "d": 84
+          },
+          "requires_ramp": false,
+          "requires_lift": true,
+          "lift_capacity_min_lbs": 250,
+          "cargo_space_cu_ft": 42,
+          "securement_points": 4,
+          "power_requirement": "110V_inverter",
+          "operator_assistance": "two_person_min",
+          "notes": "Partially disassembled hospital bed. Requires cargo van or box truck. Two-person minimum."
+        }
+      }
+    },
+    "vehicle": {
+      "description": "Transport vehicles available to volunteers",
+      "instances": {
+        "sedan": {
+          "passenger_capacity": 4,
+          "cargo_space_cu_ft": 15,
+          "wheelchair_slots": 0,
+          "lift_equipped": false,
+          "lift_capacity_lbs": null,
+          "ramp_equipped": false,
+          "ramp_width_in": null,
+          "ramp_slope_ratio": null,
+          "pet_capacity": 1,
+          "pet_size_max": "medium",
+          "securement_points": 0,
+          "power_outlets": [],
+          "door_width_in": 42,
+          "interior_headroom_in": 40,
+          "climate_control": "basic",
+          "operator_requirements": [
+            "standard_license"
+          ],
+          "notes": "Standard passenger sedan. No wheelchair accommodation. Small trunk."
+        },
+        "suv": {
+          "passenger_capacity": 5,
+          "cargo_space_cu_ft": 30,
+          "wheelchair_slots": 0,
+          "lift_equipped": false,
+          "lift_capacity_lbs": null,
+          "ramp_equipped": false,
+          "ramp_width_in": null,
+          "ramp_slope_ratio": null,
+          "pet_capacity": 2,
+          "pet_size_max": "large",
+          "securement_points": 2,
+          "power_outlets": [
+            "12V"
+          ],
+          "door_width_in": 44,
+          "interior_headroom_in": 42,
+          "climate_control": "basic",
+          "operator_requirements": [
+            "standard_license"
+          ],
+          "notes": "Sport utility vehicle. Large cargo area. Can fit folded manual wheelchair. No ramp/lift."
+        },
+        "passenger_van": {
+          "passenger_capacity": 8,
+          "cargo_space_cu_ft": 45,
+          "wheelchair_slots": 1,
+          "lift_equipped": true,
+          "lift_capacity_lbs": 300,
+          "ramp_equipped": false,
+          "ramp_width_in": null,
+          "ramp_slope_ratio": null,
+          "pet_capacity": 2,
+          "pet_size_max": "large",
+          "securement_points": 4,
+          "power_outlets": [
+            "12V",
+            "110V_inverter"
+          ],
+          "door_width_in": 48,
+          "interior_headroom_in": 56,
+          "climate_control": "full",
+          "operator_requirements": [
+            "standard_license",
+            "wheelchair_lift_training"
+          ],
+          "notes": "Standard wheelchair van with rear lift. Fits one motorized wheelchair or manual chair. 300 lb lift limit."
+        },
+        "heavy_duty_van": {
+          "passenger_capacity": 6,
+          "cargo_space_cu_ft": 65,
+          "wheelchair_slots": 2,
+          "lift_equipped": true,
+          "lift_capacity_lbs": 800,
+          "ramp_equipped": true,
+          "ramp_width_in": 36,
+          "ramp_slope_ratio": "1:12",
+          "pet_capacity": 3,
+          "pet_size_max": "extra_large",
+          "securement_points": 8,
+          "power_outlets": [
+            "12V",
+            "110V_inverter",
+            "24V"
+          ],
+          "door_width_in": 48,
+          "interior_headroom_in": 60,
+          "climate_control": "full",
+          "operator_requirements": [
+            "commercial_license_class_C",
+            "wheelchair_lift_training",
+            "securement_certification"
+          ],
+          "notes": "Commercial-grade transport van. Reinforced lift (800 lbs). Side ramp + rear lift. Fits bariatric wheelchair."
+        },
+        "minivan": {
+          "passenger_capacity": 7,
+          "cargo_space_cu_ft": 35,
+          "wheelchair_slots": 0,
+          "lift_equipped": false,
+          "lift_capacity_lbs": null,
+          "ramp_equipped": false,
+          "ramp_width_in": null,
+          "ramp_slope_ratio": null,
+          "pet_capacity": 2,
+          "pet_size_max": "large",
+          "securement_points": 2,
+          "power_outlets": [
+            "12V"
+          ],
+          "door_width_in": 44,
+          "interior_headroom_in": 44,
+          "climate_control": "basic",
+          "operator_requirements": [
+            "standard_license"
+          ],
+          "notes": "Family minivan. Stow-and-go seating. Can fit folded manual wheelchair. No lift."
+        },
+        "cargo_van": {
+          "passenger_capacity": 2,
+          "cargo_space_cu_ft": 120,
+          "wheelchair_slots": 0,
+          "lift_equipped": false,
+          "lift_capacity_lbs": null,
+          "ramp_equipped": true,
+          "ramp_width_in": 48,
+          "ramp_slope_ratio": "1:8",
+          "pet_capacity": 0,
+          "pet_size_max": null,
+          "securement_points": 6,
+          "power_outlets": [
+            "12V",
+            "110V_inverter"
+          ],
+          "door_width_in": 52,
+          "interior_headroom_in": 64,
+          "climate_control": "none",
+          "operator_requirements": [
+            "standard_license"
+          ],
+          "notes": "Empty cargo van. No passenger seating. Used for equipment/furniture transport. Ramp for loading."
+        },
+        "box_truck": {
+          "passenger_capacity": 3,
+          "cargo_space_cu_ft": 400,
+          "wheelchair_slots": 0,
+          "lift_equipped": true,
+          "lift_capacity_lbs": 1500,
+          "ramp_equipped": true,
+          "ramp_width_in": 48,
+          "ramp_slope_ratio": "1:12",
+          "pet_capacity": 0,
+          "pet_size_max": null,
+          "securement_points": 12,
+          "power_outlets": [
+            "12V",
+            "110V_inverter",
+            "24V"
+          ],
+          "door_width_in": 96,
+          "interior_headroom_in": 84,
+          "climate_control": "none",
+          "operator_requirements": [
+            "commercial_license_class_B",
+            "lift_training"
+          ],
+          "notes": "Large box truck with liftgate. Used for bulk supply runs or hospital bed transport."
+        },
+        "bus": {
+          "passenger_capacity": 24,
+          "cargo_space_cu_ft": 80,
+          "wheelchair_slots": 2,
+          "lift_equipped": true,
+          "lift_capacity_lbs": 600,
+          "ramp_equipped": true,
+          "ramp_width_in": 36,
+          "ramp_slope_ratio": "1:12",
+          "pet_capacity": 0,
+          "pet_size_max": null,
+          "securement_points": 8,
+          "power_outlets": [
+            "12V",
+            "110V_inverter"
+          ],
+          "door_width_in": 36,
+          "interior_headroom_in": 78,
+          "climate_control": "full",
+          "operator_requirements": [
+            "commercial_license_class_B",
+            "passenger_endorsement",
+            "wheelchair_lift_training"
+          ],
+          "notes": "Paratransit bus. Multiple wheelchair positions. Climate controlled. CDL required."
+        }
+      }
+    },
+    "shelter_room": {
+      "description": "Physical accommodation units within shelters",
+      "instances": {
+        "single_bed": {
+          "bed_count": 1,
+          "max_occupancy": 1,
+          "square_footage": 80,
+          "wheelchair_accessible": false,
+          "door_width_in": 32,
+          "bathroom_type": "shared",
+          "bathroom_wheelchair_accessible": false,
+          "pet_policy": "none",
+          "climate_control": "basic",
+          "privacy_level": "minimal",
+          "notes": "Standard single bed in shared dormitory. No private space."
+        },
+        "twin_beds": {
+          "bed_count": 2,
+          "max_occupancy": 2,
+          "square_footage": 120,
+          "wheelchair_accessible": false,
+          "door_width_in": 32,
+          "bathroom_type": "shared",
+          "bathroom_wheelchair_accessible": false,
+          "pet_policy": "none",
+          "climate_control": "basic",
+          "privacy_level": "minimal",
+          "notes": "Two twin beds in shared room. Couples or parent-child."
+        },
+        "family_unit": {
+          "bed_count": 4,
+          "max_occupancy": 5,
+          "square_footage": 250,
+          "wheelchair_accessible": true,
+          "door_width_in": 36,
+          "bathroom_type": "private",
+          "bathroom_wheelchair_accessible": true,
+          "pet_policy": "service_animals_only",
+          "climate_control": "full",
+          "privacy_level": "high",
+          "notes": "Private family room with en-suite bathroom. Wheelchair accessible. Service animals welcome."
+        },
+        "accessible_unit": {
+          "bed_count": 2,
+          "max_occupancy": 2,
+          "square_footage": 200,
+          "wheelchair_accessible": true,
+          "door_width_in": 42,
+          "bathroom_type": "private",
+          "bathroom_wheelchair_accessible": true,
+          "pet_policy": "all_pets",
+          "climate_control": "full",
+          "privacy_level": "medium",
+          "notes": "ADA-compliant room. Roll-in shower. Grab bars. Wide doorways. All pets welcome."
+        },
+        "bunk_room": {
+          "bed_count": 8,
+          "max_occupancy": 8,
+          "square_footage": 300,
+          "wheelchair_accessible": false,
+          "door_width_in": 36,
+          "bathroom_type": "shared",
+          "bathroom_wheelchair_accessible": false,
+          "pet_policy": "none",
+          "climate_control": "basic",
+          "privacy_level": "none",
+          "notes": "Large dormitory with bunk beds. Youth shelter standard. No privacy."
+        },
+        "private_suite": {
+          "bed_count": 1,
+          "max_occupancy": 1,
+          "square_footage": 180,
+          "wheelchair_accessible": true,
+          "door_width_in": 38,
+          "bathroom_type": "private",
+          "bathroom_wheelchair_accessible": true,
+          "pet_policy": "all_pets",
+          "climate_control": "full",
+          "privacy_level": "maximum",
+          "notes": "Private studio apartment within shelter. Kitchenette. Full bath. Maximum privacy."
+        }
+      }
+    },
+    "animal": {
+      "description": "Animals accompanying clients",
+      "instances": {
+        "service_dog": {
+          "animal_type": "dog",
+          "legal_status": "ADA_protected",
+          "weight_lbs": 75,
+          "space_required_cu_ft": 15,
+          "vehicle_requirement": "rides_with_handler",
+          "shelter_requirement": "must_sleep_with_handler",
+          "documentation_required": false,
+          "allergen_risk": "medium",
+          "notes": "ADA-protected service animal. Cannot be separated from handler. No documentation required by law."
+        },
+        "emotional_support_dog": {
+          "animal_type": "dog",
+          "legal_status": "FHAA_protected",
+          "weight_lbs": 45,
+          "space_required_cu_ft": 12,
+          "vehicle_requirement": "rides_with_handler",
+          "shelter_requirement": "must_sleep_with_handler",
+          "documentation_required": true,
+          "allergen_risk": "medium",
+          "notes": "ESA. Requires letter from licensed mental health professional. FHAA housing protection only."
+        },
+        "pet_dog_small": {
+          "animal_type": "dog",
+          "legal_status": "pet",
+          "weight_lbs": 15,
+          "space_required_cu_ft": 8,
+          "vehicle_requirement": "carrier_recommended",
+          "shelter_requirement": "pet_friendly_shelter_only",
+          "documentation_required": false,
+          "allergen_risk": "low",
+          "notes": "Small pet dog. Must be in carrier in vehicle. Only pet-friendly shelters."
+        },
+        "pet_dog_large": {
+          "animal_type": "dog",
+          "legal_status": "pet",
+          "weight_lbs": 70,
+          "space_required_cu_ft": 20,
+          "vehicle_requirement": "rides_with_handler_or_cargo",
+          "shelter_requirement": "pet_friendly_shelter_only",
+          "documentation_required": false,
+          "allergen_risk": "medium",
+          "notes": "Large pet dog. May need cargo area in vehicle. Only pet-friendly shelters."
+        },
+        "cat": {
+          "animal_type": "cat",
+          "legal_status": "pet",
+          "weight_lbs": 10,
+          "space_required_cu_ft": 6,
+          "vehicle_requirement": "carrier_required",
+          "shelter_requirement": "pet_friendly_shelter_only",
+          "documentation_required": false,
+          "allergen_risk": "high",
+          "notes": "Cat in carrier. High allergen risk for other shelter residents."
+        },
+        "bird": {
+          "animal_type": "bird",
+          "legal_status": "pet",
+          "weight_lbs": 1,
+          "space_required_cu_ft": 4,
+          "vehicle_requirement": "carrier_required",
+          "shelter_requirement": "pet_friendly_shelter_only",
+          "documentation_required": false,
+          "allergen_risk": "low",
+          "notes": "Caged bird. Fragile. Keep cage covered during transport."
+        }
+      }
+    }
+  },
+  "constraint_rules": {
+    "vehicle_to_mobility_aid": {
+      "description": "Determines if a vehicle can physically accommodate a mobility aid",
+      "rules": [
+        {
+          "if": "mobility_aid.requires_lift == True",
+          "then": "vehicle.lift_equipped == True AND vehicle.lift_capacity_lbs >= mobility_aid.weight_lbs",
+          "severity": "blocking",
+          "message_template": "{mobility_aid} requires lift (min {lift_min} lbs). {vehicle} lift capacity: {lift_actual} lbs."
+        },
+        {
+          "if": "mobility_aid.requires_ramp == True",
+          "then": "vehicle.ramp_equipped == True AND vehicle.ramp_width_in >= mobility_aid.unfolded_dimensions_in.w",
+          "severity": "blocking",
+          "message_template": "{mobility_aid} requires ramp (min {ramp_min} in wide). {vehicle} ramp: {ramp_actual} in."
+        },
+        {
+          "if": "mobility_aid.cargo_space_cu_ft > 0",
+          "then": "vehicle.cargo_space_cu_ft >= mobility_aid.cargo_space_cu_ft",
+          "severity": "blocking",
+          "message_template": "{mobility_aid} needs {cargo_needed} cu ft cargo space. {vehicle} has {cargo_actual} cu ft."
+        },
+        {
+          "if": "mobility_aid.power_requirement != None",
+          "then": "mobility_aid.power_requirement IN vehicle.power_outlets",
+          "severity": "warning",
+          "message_template": "{mobility_aid} requires {power_needed} power. {vehicle} outlets: {power_actual}."
+        },
+        {
+          "if": "mobility_aid.sequerement_points > 0",
+          "then": "vehicle.sequerement_points >= mobility_aid.sequerement_points",
+          "severity": "blocking",
+          "message_template": "{mobility_aid} needs {secure_needed} securement points. {vehicle} has {secure_actual}."
+        }
+      ]
+    },
+    "vehicle_to_animal": {
+      "description": "Determines if a vehicle can accommodate an animal",
+      "rules": [
+        {
+          "if": "animal.legal_status == 'ADA_protected'",
+          "then": "animal.rides_with_handler == True",
+          "severity": "blocking",
+          "message_template": "{animal} is ADA-protected service animal. Must ride with handler in passenger area."
+        },
+        {
+          "if": "animal.vehicle_requirement == 'carrier_required'",
+          "then": "vehicle.cargo_space_cu_ft >= animal.space_required_cu_ft OR vehicle.passenger_capacity >= (family_size + 1)",
+          "severity": "blocking",
+          "message_template": "{animal} requires carrier. Need {space_needed} cu ft or passenger seat."
+        },
+        {
+          "if": "animal.vehicle_requirement == 'cargo'",
+          "then": "vehicle.cargo_space_cu_ft >= animal.space_required_cu_ft AND vehicle.climate_control != 'none'",
+          "severity": "blocking",
+          "message_template": "{animal} in cargo area needs {space_needed} cu ft and climate control."
+        }
+      ]
+    },
+    "vehicle_to_family": {
+      "description": "Determines if a vehicle can accommodate the entire family unit",
+      "rules": [
+        {
+          "if": "family_size > 0",
+          "then": "vehicle.passenger_capacity >= family_size",
+          "severity": "blocking",
+          "message_template": "Family of {family_size} needs {seats_needed} seats. {vehicle} has {seats_actual} passenger capacity."
+        },
+        {
+          "if": "family_has_wheelchair == True",
+          "then": "vehicle.wheelchair_slots >= wheelchair_count",
+          "severity": "blocking",
+          "message_template": "Family has {wheelchair_count} wheelchair user(s). {vehicle} has {slots_actual} wheelchair slot(s)."
+        }
+      ]
+    },
+    "shelter_to_family": {
+      "description": "Determines if a shelter room can accommodate the family unit",
+      "rules": [
+        {
+          "if": "family_size > 0",
+          "then": "shelter_room.max_occupancy >= family_size",
+          "severity": "blocking",
+          "message_template": "Family of {family_size} exceeds {room} max occupancy of {max_occ}."
+        },
+        {
+          "if": "family_has_wheelchair == True",
+          "then": "shelter_room.wheelchair_accessible == True AND shelter_room.door_width_in >= 32",
+          "severity": "blocking",
+          "message_template": "Wheelchair user requires accessible room. {room} wheelchair_accessible: {wc_actual}."
+        },
+        {
+          "if": "family_has_service_animal == True",
+          "then": "shelter_room.pet_policy IN ['service_animals_only', 'all_pets']",
+          "severity": "blocking",
+          "message_template": "Service animal requires pet-friendly room. {room} pet_policy: {pet_actual}."
+        },
+        {
+          "if": "family_has_pet == True AND family_has_service_animal == False",
+          "then": "shelter_room.pet_policy == 'all_pets'",
+          "severity": "blocking",
+          "message_template": "Pet (non-service) requires all-pets room. {room} pet_policy: {pet_actual}."
+        }
+      ]
+    },
+    "operator_to_vehicle": {
+      "description": "Determines if a volunteer is qualified to operate a vehicle",
+      "rules": [
+        {
+          "if": "vehicle.operator_requirements != []",
+          "then": "ALL(vehicle.operator_requirements) IN volunteer.certifications",
+          "severity": "blocking",
+          "message_template": "{vehicle} requires {certs_needed}. Volunteer has {certs_actual}."
+        }
+      ]
+    }
+  },
+  "priority_matrix": {
+    "description": "When no exact match exists, these constraints are relaxed in this order (lowest priority first)",
+    "relaxation_order": [
+      {
+        "priority": 6,
+        "constraint": "pet_policy",
+        "description": "Drop pet requirement last — many clients won't separate from animals"
+      },
+      {
+        "priority": 5,
+        "constraint": "zone",
+        "description": "Expand to adjacent zones if no local match"
+      },
+      {
+        "priority": 4,
+        "constraint": "vehicle_type",
+        "description": "Accept larger vehicle if preferred type unavailable"
+      },
+      {
+        "priority": 3,
+        "constraint": "privacy_level",
+        "description": "Accept shared room if private unavailable"
+      },
+      {
+        "priority": 2,
+        "constraint": "climate_control",
+        "description": "Accept basic climate control if full unavailable"
+      },
+      {
+        "priority": 1,
+        "constraint": "wheelchair_accessible",
+        "description": "NEVER relax wheelchair accessibility. This is a hard medical requirement."
+      }
+    ]
+  },
+  "validation_examples": [
+    {
+      "scenario": "Golden Path: Family of 3, motorized wheelchair, service dog, Zone B",
+      "client_profile": {
+        "family_size": 3,
+        "adults": 1,
+        "children": 2,
+        "mobility_aids": [
+          "motorized_wheelchair"
+        ],
+        "animals": [
+          "service_dog"
+        ],
+        "zone": "B"
+      },
+      "vehicle": "passenger_van",
+      "shelter_room": "family_unit",
+      "expected_result": {
+        "compatible": false,
+        "violations": [
+          {
+            "constraint": "lift_capacity",
+            "message": "motorized_wheelchair (350 lbs) exceeds passenger_van lift capacity (300 lbs)"
+          }
+        ],
+        "recommendation": "Upgrade to heavy_duty_van (800 lb lift) or bus (600 lb lift)"
+      }
+    },
+    {
+      "scenario": "Fixed: Same family with heavy_duty_van",
+      "client_profile": {
+        "family_size": 3,
+        "adults": 1,
+        "children": 2,
+        "mobility_aids": [
+          "motorized_wheelchair"
+        ],
+        "animals": [
+          "service_dog"
+        ],
+        "zone": "B"
+      },
+      "vehicle": "heavy_duty_van",
+      "shelter_room": "family_unit",
+      "expected_result": {
+        "compatible": true,
+        "violations": [],
+        "notes": "heavy_duty_van lift (800 lbs) exceeds motorized_wheelchair (350 lbs). Service dog rides with handler. Family_unit accommodates 5 max."
+      }
+    },
+    {
+      "scenario": "Simple: Single adult, walker, no pets, Zone A",
+      "client_profile": {
+        "family_size": 1,
+        "adults": 1,
+        "children": 0,
+        "mobility_aids": [
+          "walker"
+        ],
+        "animals": [],
+        "zone": "A"
+      },
+      "vehicle": "sedan",
+      "shelter_room": "single_bed",
+      "expected_result": {
+        "compatible": true,
+        "violations": [],
+        "notes": "Walker fits any vehicle. Single bed sufficient. No special requirements."
+      }
+    }
+  ]
+}

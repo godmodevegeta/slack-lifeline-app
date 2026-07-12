@@ -1,3 +1,4 @@
+import os
 from logging import Logger
 
 from slack_bolt import BoltContext, Say, SayStream, SetStatus
@@ -67,7 +68,7 @@ def handle_message(
             channel_id=channel_id,
             thread_ts=thread_ts,
             message_ts=event["ts"],
-            user_token=context.user_token,
+            user_token=context.user_token or os.environ.get("SLACK_USER_TOKEN"),
         )
         result = run_agent(text, deps, message_history=history)
 

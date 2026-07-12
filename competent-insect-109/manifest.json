@@ -1,10 +1,10 @@
 {
   "display_information": {
-    "name": "competent-insect-109"
+    "name": "Lifeline"
   },
   "features": {
     "assistant_view": {
-      "assistant_description": "Hi, I am an agent built using Bolt for Python. I am here to help you out!",
+      "assistant_description": "Lifeline: autonomous dispatch agent for NGO crisis response. Matches shelter beds and volunteer transport in seconds.",
       "suggested_prompts": []
     },
     "app_home": {
@@ -13,7 +13,7 @@
       "messages_tab_read_only_enabled": false
     },
     "bot_user": {
-      "display_name": "competent-insect-109",
+      "display_name": "Lifeline",
       "always_online": true
     }
   },
