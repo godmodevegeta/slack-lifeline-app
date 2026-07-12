@@ -15,7 +15,7 @@ This guide will walk you through setting up the Lifeline environment, running th
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/lifeline-slack-agent.git
+   git clone https://github.com/godmodevegeta/lifeline-slack-agent.git
    cd lifeline-slack-agent
    ```
 
