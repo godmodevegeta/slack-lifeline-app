@@ -20,7 +20,6 @@ cffi==2.0.0
 charset-normalizer==3.4.7
 click==8.4.1
 cohere==7.0.4
--e git+ssh://git@github.com/godmodevegeta/slack-lifeline-app.git@31680999bd393cb2d4ffc9a55c78a97403226999#egg=competent_insect_109&subdirectory=competent-insect-109
 cryptography==49.0.0
 cyclopts==4.19.0
 distro==1.9.0
