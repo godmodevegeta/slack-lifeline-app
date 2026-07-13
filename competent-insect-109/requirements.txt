@@ -20,7 +20,7 @@ cffi==2.0.0
 charset-normalizer==3.4.7
 click==8.4.1
 cohere==7.0.4
--e git+ssh://git@github.com/godmodevegeta/slack-lifeline-app.git@9655bb87a0aac3dbdd364413faa2a59c169c0934#egg=competent_insect_109&subdirectory=competent-insect-109
+-e git+ssh://git@github.com/godmodevegeta/slack-lifeline-app.git@31680999bd393cb2d4ffc9a55c78a97403226999#egg=competent_insect_109&subdirectory=competent-insect-109
 cryptography==49.0.0
 cyclopts==4.19.0
 distro==1.9.0
@@ -77,6 +77,7 @@ multidict==6.7.1
 nexus-rpc==1.4.0
 openai==2.43.0
 openapi-pydantic==0.5.1
+openmeteo-mcp-server==0.1.1
 opentelemetry-api==1.39.1
 opentelemetry-exporter-otlp-proto-common==1.39.1
 opentelemetry-exporter-otlp-proto-http==1.39.1
