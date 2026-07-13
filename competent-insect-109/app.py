@@ -18,10 +18,12 @@ logging.basicConfig(level=logging.INFO, handlers=[handler])
 
 app = App(
     token=os.environ.get("SLACK_BOT_TOKEN"),
-    client=WebClient(
-        base_url=os.environ.get("SLACK_API_URL", "https://slack.com/api"),
-        token=os.environ.get("SLACK_BOT_TOKEN"),
-    ),
+    # client=WebClient(
+    #     base_url=os.environ.get("SLACK_API_URL", "https://slack.com/api"),
+    #     token=os.environ.get("SLACK_BOT_TOKEN"),
+    # ),
+    signing_secret=os.environ.get("SLACK_SIGNING_SECRET"), # Required for HTTP mode
+
 )
 
 register_listeners(app)
