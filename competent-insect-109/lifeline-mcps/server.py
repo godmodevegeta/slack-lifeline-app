@@ -17,7 +17,7 @@ logging.basicConfig(
     datefmt="%Y-%m-%d %H:%M:%S",
     handlers=[
         logging.StreamHandler(sys.stdout),
-        logging.FileHandler("mcp_server.log", mode="a", encoding="utf-8"),
+        # logging.FileHandler("mcp_server.log", mode="a", encoding="utf-8"),
     ],
 )
 logger = logging.getLogger("lifeline.mcp")
