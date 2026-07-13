@@ -126,4 +126,4 @@ if __name__ == "__main__":
     if redirect_uri:
         install_url = urljoin(redirect_uri, "/slack/install")
         logger.info("Connect the Slack MCP Server: %s", install_url)
-    app.start(port=port)
+    app.start(port=port, host="0.0.0.0")
