@@ -644,5 +644,13 @@ def dispatch_volunteer(volunteer_id: str, shelter_name: str, initiated_by_user: 
 # ==========================================
 
 if __name__ == "__main__":
-    logger.info("Starting Lifeline MCP server on port 8000 (transport=http)")
-    mcp.run(transport="http", port=8000)
+    # logger.info("Starting Lifeline MCP server on port 8000 (transport=http)")
+    # mcp.run(transport="http", port=8000)
+    # Render injects the PORT environment variable. Default to 8000 for local dev.
+    port = int(os.environ.get("PORT", 8000))
+    
+    logger.info(f"Starting Lifeline MCP server on port {port} (transport=http)")
+    
+    # CRITICAL: host="0.0.0.0" allows Render's router to see the port. 
+    # The default "127.0.0.1" is only visible inside the container itself.
+    mcp.run(transport="http", host="0.0.0.0", port=port)
