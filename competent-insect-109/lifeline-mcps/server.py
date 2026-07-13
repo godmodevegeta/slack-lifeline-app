@@ -70,15 +70,23 @@ except Exception as exc:
 # ==========================================
 # 3. GOOGLE SHEETS CONFIGURATION (Transport)
 # ==========================================
-credentials_path = os.path.join(os.path.dirname(__file__), 'credentials.json')
-logger.debug("Initialising Google Sheets client with credentials: %s", credentials_path)
+# credentials_path = os.path.join(os.path.dirname(__file__), 'credentials.json')
+# logger.debug("Initialising Google Sheets client with credentials: %s", credentials_path)
 try:
-    gc = gspread.service_account(filename=credentials_path)
+    # 1. Production: Load from Environment Variable (JSON string)
+    creds_json = os.getenv("GOOGLE_CREDENTIALS")
+    if creds_json:
+        gc = gspread.service_account_from_dict(json.loads(creds_json))
+    else:
+        # 2. Local Dev: Load from file
+        creds_file = os.path.join(os.path.dirname(__file__), 'credentials.json')
+        gc = gspread.service_account(filename=creds_file)
+    # gc = gspread.service_account(filename=credentials_path)
     logger.info("Google Sheets service account authenticated")
     spreadsheet = gc.open("slack_lifeline")
     logger.info("Spreadsheet 'slack_lifeline' opened successfully")
 except FileNotFoundError:
-    logger.critical("credentials.json NOT FOUND at %s", credentials_path)
+    logger.critical("credentials.json NOT FOUND at %s", creds_file)
     raise
 except Exception as exc:
     logger.critical("Failed to open Google Sheets spreadsheet: %s", exc, exc_info=True)
